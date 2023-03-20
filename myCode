@@ -1,0 +1,29 @@
+const items = [
+  { name: 'Apple', description: 'A fruit with a red or green skin' },
+  { name: 'Banana', description: 'A yellow fruit with a curved shape' },
+  { name: 'Orange', description: 'A citrus fruit with an orange skin' },
+];
+
+const searchInput = document.querySelector('#search-input');
+const resultsList = document.querySelector('#results-list');
+
+searchInput.addEventListener('input', (event) => {
+  const searchValue = event.target.value.toLowerCase();
+  const filteredItems = items.filter(item => (
+    item.name.toLowerCase().includes(searchValue) ||
+    item.description.toLowerCase().includes(searchValue)
+  ));
+
+  // Clear previous results
+  resultsList.innerHTML = '';
+
+  // Add new results to the list
+  filteredItems.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = item.name;
+    const p = document.createElement('p');
+    p.textContent = item.description;
+    li.appendChild(p);
+    resultsList.appendChild(li);
+  });
+});
